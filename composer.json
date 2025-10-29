@@ -3,6 +3,8 @@
   "description": "Laravel quick setup command package that automates .env setup, composer/npm install, migrations, storage link, and cache clear.",
   "type": "library",
   "license": "MIT",
+  "minimum-stability": "stable",
+  "prefer-stable": true,
   "authors": [
     {
       "name": "Fahim Hossain Munna",
