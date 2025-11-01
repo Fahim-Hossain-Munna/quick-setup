@@ -15,7 +15,7 @@ class QuickSetupCommand extends Command
 
     public function handle()
     {
-        $this->info('🚀 Quick setup started...');
+        $this->info('Quick setup started...');
 
         // 1) Copy .env.example -> .env
         $envExample = base_path('.env.example');
@@ -29,13 +29,13 @@ class QuickSetupCommand extends Command
         if (file_exists($envPath)) {
             if ($this->confirm('.env already exists. Overwrite?', false)) {
                 copy($envExample, $envPath);
-                $this->info('✅ .env overwritten.');
+                $this->info('.env overwritten.');
             } else {
                 $this->info('Keeping existing .env.');
             }
         } else {
             copy($envExample, $envPath);
-            $this->info('✅ .env created from .env.example.');
+            $this->info('.env created from .env.example.');
         }
 
         // 2) Ask for inputs
@@ -57,11 +57,11 @@ class QuickSetupCommand extends Command
         $this->setEnvValue('DB_USERNAME', $dbUser);
         $this->setEnvValue('DB_PASSWORD', $dbPass ?? '');
 
-        $this->info('✅ .env file updated successfully.');
+        $this->info('.env file updated successfully.');
 
-        // 4) composer install
-        if ($this->confirm('Run composer install?', true)) {
-            $this->runProcess(['composer', 'install']);
+       // 4) Composer logic
+        if ($this->confirm('Run composer install/update?', true)) {
+            $this->runComposerCommand();
         }
 
         // 5) npm install
@@ -95,7 +95,7 @@ class QuickSetupCommand extends Command
         $this->runProcess(['php', 'artisan', 'route:clear'], false);
         $this->runProcess(['php', 'artisan', 'view:clear'], false);
 
-        $this->info('🎉 Quick setup completed successfully!');
+        $this->info('Quick setup completed successfully!');
         return 0;
     }
 
@@ -138,8 +138,19 @@ class QuickSetupCommand extends Command
             $stmt->execute(['db' => $db]);
             return (bool) $stmt->fetch();
         } catch (Exception $e) {
-            $this->warn("⚠️ DB check failed: " . $e->getMessage());
+            $this->warn("DB check failed: " . $e->getMessage());
             return false;
+        }
+    }
+
+        protected function runComposerCommand()
+    {
+        if (file_exists(base_path('vendor'))) {
+            $this->info('Vendor folder found → Running composer update...');
+            $this->runProcess(['composer', 'update']);
+        } else {
+            $this->info('No vendor folder → Running composer install...');
+            $this->runProcess(['composer', 'install']);
         }
     }
 }

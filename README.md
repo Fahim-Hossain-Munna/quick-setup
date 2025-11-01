@@ -1,4 +1,4 @@
-# 🚀 Laravel Setup Automator
+## 🚀 Laravel Setup Automator Package
 
 [![Packagist Version](https://img.shields.io/packagist/v/fahimhossainmunna/quick-setup.svg?style=flat-square)](https://packagist.org/packages/fahimhossainmunna/quick-setup)
 [![Total Downloads](https://img.shields.io/packagist/dt/fahimhossainmunna/quick-setup.svg?style=flat-square)](https://packagist.org/packages/fahimhossainmunna/quick-setup)
@@ -42,13 +42,15 @@ Perfect for developers who want a **faster, cleaner, and repeatable setup workfl
 
 You can install it globally or directly inside your Laravel project.
 
-### **Install in your Laravel project**
+### **First-Time Installation (fresh Laravel project)**
 ```bash
+composer install
 composer require fahimhossainmunna/quick-setup
 ```
 
 ### Once installed, simply run the following Artisan command:
 ```bash
+composer install
 php artisan run:quick-setup
 ```
 

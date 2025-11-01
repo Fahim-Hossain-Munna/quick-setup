@@ -1,6 +1,6 @@
 {
   "name": "fahimhossainmunna/quick-setup",
-  "description": "Laravel quick setup command package that automates .env setup, composer/npm install, migrations, storage link, and cache clear.",
+  "description": "A Laravel quick setup automation package that instantly configures your project by generating the .env file, setting up environment values, installing Composer and NPM dependencies, running migrations and seeders, linking storage, and clearing caches — all with a single Artisan command.",
   "type": "library",
   "license": "MIT",
   "minimum-stability": "stable",
